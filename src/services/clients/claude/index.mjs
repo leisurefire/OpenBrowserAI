@@ -298,19 +298,20 @@ export class Claude {
       updated_at,
     })
     await convo.sendMessage(message, params)
-    await this.request(`/api/generate_chat_title`, {
-      headers: {
-        'content-type': 'application/json',
-        cookie: `sessionKey=${this.sessionKey}`,
+    await this.request(
+      `/api/organizations/${this.organizationId}/chat_conversations/${convoID}/title`,
+      {
+        headers: {
+          'content-type': 'application/json',
+          cookie: `sessionKey=${this.sessionKey}`,
+        },
+        body: JSON.stringify({
+          message_content: message,
+          recent_titles: this.recent_conversations.map((i) => i.name),
+        }),
+        method: 'POST',
       },
-      body: JSON.stringify({
-        organization_uuid: this.organizationId,
-        conversation_uuid: convoID,
-        message_content: message,
-        recent_titles: this.recent_conversations.map((i) => i.name),
-      }),
-      method: 'POST',
-    })
+    )
       .then((r) => r.json())
       .catch(errorHandle('startConversation generate_chat_title'))
     return convo
