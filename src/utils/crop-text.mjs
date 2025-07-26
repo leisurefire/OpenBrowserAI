@@ -36,6 +36,8 @@ export async function cropText(
   tiktoken = true,
 ) {
   const userConfig = await getUserConfig()
+  if (!userConfig.cropText) return text
+
   const k = modelNameToDesc(
     userConfig.apiMode ? apiModeToModelName(userConfig.apiMode) : userConfig.modelName,
     null,

@@ -585,6 +585,17 @@ export function GeneralPart({ config, updateConfig, setTabIndex }) {
         />
         {t('Focus to input box after answering')}
       </label>
+      <label>
+        <input
+          type="checkbox"
+          checked={config.cropText}
+          onChange={(e) => {
+            const checked = e.target.checked
+            updateConfig({ cropText: checked })
+          }}
+        />
+        {t("Crop Text to ensure the input tokens do not exceed the model's limit")}
+      </label>
       <br />
       <div style={{ display: 'flex', gap: '10px' }}>
         <button

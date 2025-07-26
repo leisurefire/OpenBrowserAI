@@ -370,6 +370,7 @@ export const defaultConfig = {
   customClaudeApiUrl: 'https://api.anthropic.com',
   disableWebModeHistory: true,
   hideContextMenu: false,
+  cropText: true,
   siteRegex: 'match nothing',
   useSiteRegexOnly: false,
   inputQuery: '',
