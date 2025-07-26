@@ -281,11 +281,11 @@ export const Models = {
   bingFree4: { value: '', desc: 'Bing (Web, GPT-4)' },
   bingFreeSydney: { value: '', desc: 'Bing (Web, GPT-4, Sydney)' },
 
-  moonshotWebFree: { value: 'k2', desc: 'Kimi.Moonshot (Web k2, 100k)' },
-  moonshotWebFreeK15: { value: 'k1.5', desc: 'Kimi.Moonshot (Web k1.5, 100k)' },
+  moonshotWebFree: { value: 'k2', desc: 'Kimi.Moonshot (Web k2, 128K)' },
+  moonshotWebFreeK15: { value: 'k1.5', desc: 'Kimi.Moonshot (Web k1.5, 128k)' },
   moonshotWebFreeK15Think: {
     value: 'k1.5-thinking',
-    desc: 'Kimi.Moonshot (Web k1.5 Thinking, 100k)',
+    desc: 'Kimi.Moonshot (Web k1.5 Thinking, 128k)',
   },
 
   bardWebFree: { value: '', desc: 'Gemini (Web)' },
@@ -468,11 +468,11 @@ export const defaultConfig = {
   modelMode: 'balanced',
 
   customModelApiUrl: 'http://localhost:8000/v1/chat/completions',
-  customModelName: 'gpt-3.5-turbo',
+  customModelName: 'gpt-4.1',
   githubThirdPartyUrl: 'http://127.0.0.1:3000/conversation',
 
   ollamaEndpoint: 'http://127.0.0.1:11434',
-  ollamaModelName: 'llama3.1',
+  ollamaModelName: 'llama4',
   ollamaApiKey: '',
   ollamaKeepAliveTime: '5m',
 
@@ -506,17 +506,14 @@ export const defaultConfig = {
   // If it were directly written into customApiModes, the value would become fixed, even if the user has not made any customizations.
   activeApiModes: [
     'chatgptFree35',
-    'chatgptFree4o',
-    'chatgptApi35',
-    'chatgptApi4o_128k',
     'claude2WebFree',
-    'claude35SonnetApi',
-    'bingFree4',
     'moonshotWebFree',
-    'moonshot_v1_8k',
-    'chatglmTurbo',
+    'ollamaModel',
     'customModel',
     'azureOpenAi',
+    'openRouter_anthropic_claude_sonnet4',
+    'openRouter_google_gemini_2_5_pro',
+    'openRouter_openai_o3',
   ],
   customApiModes: [
     {
@@ -529,7 +526,7 @@ export const defaultConfig = {
       active: false,
     },
   ],
-  activeSelectionTools: ['translate', 'summary', 'polish', 'code', 'ask'],
+  activeSelectionTools: ['translate', 'translateToEn', 'summary', 'polish', 'code', 'ask'],
   customSelectionTools: [
     {
       name: '',
