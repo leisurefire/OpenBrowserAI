@@ -37,7 +37,7 @@ export default {
       const title = videoList[p].part
 
       const infoResponse = await fetch(
-        `https://api.bilibili.com/x/player/v2?bvid=${bvid}&cid=${cid}`,
+        `https://api.bilibili.com/x/player/wbi/v2?bvid=${bvid}&cid=${cid}`,
         {
           credentials: 'include',
         },
