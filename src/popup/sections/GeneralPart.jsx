@@ -24,6 +24,7 @@ import {
   Models,
   isUsingOpenRouterApiModel,
   isUsingAimlApiModel,
+  isUsingDeepSeekApiModel,
 } from '../../config/index.mjs'
 import Browser from 'webextension-polyfill'
 import { languageList } from '../../config/language.mjs'
@@ -405,6 +406,17 @@ export function GeneralPart({ config, updateConfig, setTabIndex }) {
             onChange={(e) => {
               const value = e.target.value
               updateConfig({ ollamaEndpoint: value })
+            }}
+          />
+        )}
+        {isUsingDeepSeekApiModel(config) && (
+          <input
+            type="password"
+            value={config.deepSeekApiKey}
+            placeholder={t('API Key')}
+            onChange={(e) => {
+              const apiKey = e.target.value
+              updateConfig({ deepSeekApiKey: apiKey })
             }}
           />
         )}

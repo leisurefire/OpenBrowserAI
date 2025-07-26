@@ -105,6 +105,7 @@ export const moonshotApiModelKeys = [
   'moonshot_v1_32k',
   'moonshot_v1_128k',
 ]
+export const deepSeekApiModelKeys = ['deepseek_chat', 'deepseek_reasoner']
 export const openRouterApiModelKeys = [
   'openRouter_anthropic_claude_sonnet4',
   'openRouter_anthropic_claude_3_7_sonnet',
@@ -186,6 +187,10 @@ export const ModelGroups = {
   githubThirdPartyApiModelKeys: {
     value: githubThirdPartyApiModelKeys,
     desc: 'Github Third Party Waylaidwanderer (API)',
+  },
+  deepSeekApiModelKeys: {
+    value: deepSeekApiModelKeys,
+    desc: 'DeepSeek (API)',
   },
   openRouterApiModelKeys: {
     value: openRouterApiModelKeys,
@@ -346,6 +351,15 @@ export const Models = {
     desc: 'Kimi.Moonshot (128k)',
   },
 
+  deepseek_chat: {
+    value: 'deepseek-chat',
+    desc: 'DeepSeek (Chat)',
+  },
+  deepseek_reasoner: {
+    value: 'deepseek-reasoner',
+    desc: 'DeepSeek (Reasoner)',
+  },
+
   openRouter_anthropic_claude_sonnet4: {
     value: 'anthropic/claude-sonnet-4',
     desc: 'OpenRouter (Claude Sonnet 4)',
@@ -461,6 +475,7 @@ export const defaultConfig = {
   claudeApiKey: '',
   chatglmApiKey: '',
   moonshotApiKey: '',
+  deepSeekApiKey: '',
 
   customApiKey: '',
 
@@ -651,6 +666,10 @@ export function isUsingClaudeApiModel(configOrSession) {
 
 export function isUsingMoonshotApiModel(configOrSession) {
   return isInApiModeGroup(moonshotApiModelKeys, configOrSession)
+}
+
+export function isUsingDeepSeekApiModel(configOrSession) {
+  return isInApiModeGroup(deepSeekApiModelKeys, configOrSession)
 }
 
 export function isUsingOpenRouterApiModel(configOrSession) {

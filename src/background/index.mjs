@@ -37,6 +37,7 @@ import {
   isUsingMoonshotWebModel,
   isUsingOpenRouterApiModel,
   isUsingAimlApiModel,
+  isUsingDeepSeekApiModel,
 } from '../config/index.mjs'
 import '../_locales/i18n'
 import { openUrl } from '../utils/open-url'
@@ -54,6 +55,7 @@ import { generateAnswersWithClaudeWebApi } from '../services/apis/claude-web.mjs
 import { generateAnswersWithMoonshotCompletionApi } from '../services/apis/moonshot-api.mjs'
 import { generateAnswersWithMoonshotWebApi } from '../services/apis/moonshot-web.mjs'
 import { isUsingModelName } from '../utils/model-name-convert.mjs'
+import { generateAnswersWithDeepSeekApi } from '../services/apis/deepseek-api.mjs'
 
 function setPortProxy(port, proxyTabId) {
   port.proxy = Browser.tabs.connect(proxyTabId)
@@ -146,6 +148,8 @@ async function executeApi(session, port, config) {
     )
   } else if (isUsingChatGLMApiModel(session)) {
     await generateAnswersWithChatGLMApi(port, session.question, session)
+  } else if (isUsingDeepSeekApiModel(session)) {
+    await generateAnswersWithDeepSeekApi(port, session.question, session, config.deepSeekApiKey)
   } else if (isUsingOllamaApiModel(session)) {
     await generateAnswersWithOllamaApi(port, session.question, session)
   } else if (isUsingOpenRouterApiModel(session)) {
