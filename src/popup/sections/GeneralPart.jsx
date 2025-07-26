@@ -22,6 +22,8 @@ import {
   TriggerMode,
   isUsingMoonshotApiModel,
   Models,
+  isUsingOpenRouterApiModel,
+  isUsingAimlApiModel,
 } from '../../config/index.mjs'
 import Browser from 'webextension-polyfill'
 import { languageList } from '../../config/language.mjs'
@@ -414,6 +416,28 @@ export function GeneralPart({ config, updateConfig, setTabIndex }) {
             onChange={(e) => {
               const apiKey = e.target.value
               updateConfig({ ollamaApiKey: apiKey })
+            }}
+          />
+        )}
+        {isUsingOpenRouterApiModel(config) && (
+          <input
+            type="password"
+            value={config.openRouterApiKey}
+            placeholder={t('API Key')}
+            onChange={(e) => {
+              const apiKey = e.target.value
+              updateConfig({ openRouterApiKey: apiKey })
+            }}
+          />
+        )}
+        {isUsingAimlApiModel(config) && (
+          <input
+            type="password"
+            value={config.aimlApiKey}
+            placeholder={t('API Key')}
+            onChange={(e) => {
+              const apiKey = e.target.value
+              updateConfig({ aimlApiKey: apiKey })
             }}
           />
         )}

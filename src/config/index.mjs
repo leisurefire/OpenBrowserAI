@@ -94,7 +94,33 @@ export const poeWebModelKeys = [
   'poeAiWeb_Llama_2_13b',
   'poeAiWeb_Llama_2_70b',
 ]
-export const moonshotApiModelKeys = ['moonshot_v1_8k', 'moonshot_v1_32k', 'moonshot_v1_128k']
+export const moonshotApiModelKeys = [
+  'moonshot_k2',
+  'moonshot_kimi_latest',
+  'moonshot_v1_8k',
+  'moonshot_v1_32k',
+  'moonshot_v1_128k',
+]
+export const openRouterApiModelKeys = [
+  'openRouter_anthropic_claude_sonnet4',
+  'openRouter_anthropic_claude_3_7_sonnet',
+  'openRouter_google_gemini_2_5_pro',
+  'openRouter_google_gemini_2_5_flash',
+  'openRouter_openai_o3',
+  'openRouter_openai_gpt_4_1_mini',
+  'openRouter_deepseek_deepseek_chat_v3_0324_free',
+]
+export const aimlApiModelKeys = [
+  'aiml_anthropic_claude_opus_4',
+  'aiml_anthropic_claude_sonnet_4',
+  'aiml_claude_3_7_sonnet_20250219',
+  'aiml_google_gemini_2_5_pro_preview_05_06',
+  'aiml_google_gemini_2_5_flash_preview',
+  'aiml_openai_o3_2025_04_16',
+  'aiml_openai_gpt_4_1_2025_04_14',
+  'aiml_deepseek_deepseek_chat',
+  'aiml_moonshot_kimi_k2_preview',
+]
 
 export const AlwaysCustomGroups = [
   'ollamaApiModelKeys',
@@ -156,6 +182,14 @@ export const ModelGroups = {
   githubThirdPartyApiModelKeys: {
     value: githubThirdPartyApiModelKeys,
     desc: 'Github Third Party Waylaidwanderer (API)',
+  },
+  openRouterApiModelKeys: {
+    value: openRouterApiModelKeys,
+    desc: 'OpenRouter (API)',
+  },
+  aimlModelKeys: {
+    value: aimlApiModelKeys,
+    desc: 'AI/ML (API)',
   },
   customApiModelKeys: {
     value: customApiModelKeys,
@@ -294,6 +328,72 @@ export const Models = {
     value: 'moonshot-v1-128k',
     desc: 'Kimi.Moonshot (128k)',
   },
+
+  openRouter_anthropic_claude_sonnet4: {
+    value: 'anthropic/claude-sonnet-4',
+    desc: 'OpenRouter (Claude Sonnet 4)',
+  },
+  openRouter_anthropic_claude_3_7_sonnet: {
+    value: 'anthropic/claude-3.7-sonnet',
+    desc: 'OpenRouter (Claude 3.7 Sonnet)',
+  },
+  openRouter_google_gemini_2_5_pro: {
+    value: 'google/gemini-2.5-pro',
+    desc: 'OpenRouter (Gemini 2.5 Pro)',
+  },
+  openRouter_google_gemini_2_5_flash: {
+    value: 'google/gemini-2.5-flash',
+    desc: 'OpenRouter (Gemini 2.5 Flash)',
+  },
+  openRouter_openai_o3: {
+    value: 'openai/o3',
+    desc: 'OpenRouter (GPT-o3)',
+  },
+  openRouter_openai_gpt_4_1_mini: {
+    value: 'openai/gpt-4.1-mini',
+    desc: 'OpenRouter (GPT-4.1 Mini)',
+  },
+  openRouter_deepseek_deepseek_chat_v3_0324_free: {
+    value: 'deepseek/deepseek-chat-v3-0324:free',
+    desc: 'OpenRouter (DeepSeek Chat v3 Free)',
+  },
+
+  aiml_anthropic_claude_opus_4: {
+    value: 'anthropic/claude-opus-4',
+    desc: 'AIML (Claude Opus 4)',
+  },
+  aiml_anthropic_claude_sonnet_4: {
+    value: 'anthropic/claude-sonnet-4',
+    desc: 'AIML (Claude Sonnet 4)',
+  },
+  aiml_claude_3_7_sonnet_20250219: {
+    value: 'claude-3-7-sonnet-20250219',
+    desc: 'AIML (Claude 3.7 Sonnet)',
+  },
+  aiml_google_gemini_2_5_pro_preview_05_06: {
+    value: 'google/gemini-2.5-pro-preview-05-06',
+    desc: 'AIML (Gemini 2.5 Pro)',
+  },
+  aiml_google_gemini_2_5_flash_preview: {
+    value: 'google/gemini-2.5-flash-preview',
+    desc: 'AIML (Gemini 2.5 Flash)',
+  },
+  aiml_openai_o3_2025_04_16: {
+    value: 'openai/o3-2025-04-16',
+    desc: 'AIML (GPT-o3)',
+  },
+  aiml_openai_gpt_4_1_2025_04_14: {
+    value: 'openai/gpt-4.1-2025-04-14',
+    desc: 'AIML (GPT-4.1)',
+  },
+  aiml_deepseek_deepseek_chat: {
+    value: 'deepseek/deepseek-chat',
+    desc: 'AIML (DeepSeek Chat)',
+  },
+  aiml_moonshot_kimi_k2_preview: {
+    value: 'moonshot/kimi-k2-preview',
+    desc: 'AIML (Kimi K2)',
+  },
 }
 
 for (const modelName in Models) {
@@ -358,6 +458,9 @@ export const defaultConfig = {
   ollamaModelName: 'llama3.1',
   ollamaApiKey: '',
   ollamaKeepAliveTime: '5m',
+
+  openRouterApiKey: '',
+  aimlApiKey: '',
 
   // advanced
 
@@ -534,6 +637,14 @@ export function isUsingClaudeApiModel(configOrSession) {
 
 export function isUsingMoonshotApiModel(configOrSession) {
   return isInApiModeGroup(moonshotApiModelKeys, configOrSession)
+}
+
+export function isUsingOpenRouterApiModel(configOrSession) {
+  return isInApiModeGroup(openRouterApiModelKeys, configOrSession)
+}
+
+export function isUsingAimlApiModel(configOrSession) {
+  return isInApiModeGroup(aimlApiModelKeys, configOrSession)
 }
 
 export function isUsingChatGLMApiModel(configOrSession) {

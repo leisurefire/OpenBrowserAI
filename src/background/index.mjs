@@ -15,6 +15,8 @@ import { generateAnswersWithAzureOpenaiApi } from '../services/apis/azure-openai
 import { generateAnswersWithClaudeApi } from '../services/apis/claude-api.mjs'
 import { generateAnswersWithChatGLMApi } from '../services/apis/chatglm-api.mjs'
 import { generateAnswersWithWaylaidwandererApi } from '../services/apis/waylaidwanderer-api.mjs'
+import { generateAnswersWithOpenRouterApi } from '../services/apis/openrouter-api.mjs'
+import { generateAnswersWithAimlApi } from '../services/apis/aiml-api.mjs'
 import {
   defaultConfig,
   getUserConfig,
@@ -33,6 +35,8 @@ import {
   isUsingClaudeWebModel,
   isUsingMoonshotApiModel,
   isUsingMoonshotWebModel,
+  isUsingOpenRouterApiModel,
+  isUsingAimlApiModel,
 } from '../config/index.mjs'
 import '../_locales/i18n'
 import { openUrl } from '../utils/open-url'
@@ -144,6 +148,10 @@ async function executeApi(session, port, config) {
     await generateAnswersWithChatGLMApi(port, session.question, session)
   } else if (isUsingOllamaApiModel(session)) {
     await generateAnswersWithOllamaApi(port, session.question, session)
+  } else if (isUsingOpenRouterApiModel(session)) {
+    await generateAnswersWithOpenRouterApi(port, session.question, session, config.openRouterApiKey)
+  } else if (isUsingAimlApiModel(session)) {
+    await generateAnswersWithAimlApi(port, session.question, session, config.aimlApiKey)
   } else if (isUsingAzureOpenAiApiModel(session)) {
     await generateAnswersWithAzureOpenaiApi(port, session.question, session)
   } else if (isUsingGptCompletionApiModel(session)) {
