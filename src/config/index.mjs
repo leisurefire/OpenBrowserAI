@@ -210,7 +210,7 @@ export const ModelGroups = {
  * @type {Object.<string,Model>}
  */
 export const Models = {
-  chatgptFree35: { value: 'text-davinci-002-render-sha', desc: 'ChatGPT (Web)' },
+  chatgptFree35: { value: 'auto', desc: 'ChatGPT (Web)' },
 
   chatgptFree4o: { value: 'gpt-4o', desc: 'ChatGPT (Web, GPT-4o)' },
   chatgptFree4oMini: { value: 'gpt-4o-mini', desc: 'ChatGPT (Web, GPT-4o mini)' },
