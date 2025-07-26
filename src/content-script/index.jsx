@@ -389,17 +389,17 @@ async function prepareForForegroundRequests() {
   )
     return
 
-  if (location.pathname === '/') {
-    const input = document.querySelector('#prompt-textarea')
-    if (input) {
-      input.textContent = ' '
-      input.dispatchEvent(new Event('input', { bubbles: true }))
-      setTimeout(() => {
-        input.textContent = ''
-        input.dispatchEvent(new Event('input', { bubbles: true }))
-      }, 300)
-    }
-  }
+  // if (location.pathname === '/') {
+  //   const input = document.querySelector('#prompt-textarea')
+  //   if (input) {
+  //     input.textContent = ' '
+  //     input.dispatchEvent(new Event('input', { bubbles: true }))
+  //     setTimeout(() => {
+  //       input.textContent = ''
+  //       input.dispatchEvent(new Event('input', { bubbles: true }))
+  //     }, 300)
+  //   }
+  // }
 
   await Browser.runtime.sendMessage({
     type: 'SET_CHATGPT_TAB',
