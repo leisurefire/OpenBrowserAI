@@ -131,7 +131,7 @@
   "Please keep https://chatgpt.com open and try again. If it still doesn't work, type some characters in the input box of chatgpt web page and try again.": "Por favor, mantenga https://chatgpt.com abierto e inténtelo de nuevo. Si aún no funciona, escriba algunos caracteres en el cuadro de entrada de la página web de chatgpt e inténtelo de nuevo.",
   "Open Side Panel": "Abrir panel lateral",
   "Generating...": "Generando...",
-  "moonshot token required, please login at https://kimi.moonshot.cn first, and then click the retry button": "se requiere un token de moonshot, por favor inicie sesión en https://kimi.moonshot.cn primero, y luego haga clic en el botón Reintentar",
+  "moonshot token required, please login at https://kimi.com first, and then click the retry button": "se requiere un token de moonshot, por favor inicie sesión en https://kimi.com primero, y luego haga clic en el botón Reintentar",
   "Hide context menu of this extension": "Ocultar menú contextual de esta extensión",
   "Custom Claude API Url": "URL personalizada de la API de Claude",
   "Cancel": "Cancelar",

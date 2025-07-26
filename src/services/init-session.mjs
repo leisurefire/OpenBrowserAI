@@ -98,7 +98,7 @@ export function initSession({
 
     // claude.ai
     claude_conversation: null,
-    // kimi.moonshot.cn
+    // kimi.com
     moonshot_conversation: null,
   }
 }

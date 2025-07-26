@@ -131,7 +131,7 @@
   "Please keep https://chatgpt.com open and try again. If it still doesn't work, type some characters in the input box of chatgpt web page and try again.": "请保持 https://chatgpt.com 打开并重试. 如果仍然不起作用, 请在chatgpt网页的输入框中输入一些字符, 然后再试一次.",
   "Open Side Panel": "打开侧边栏",
   "Generating...": "正在生成...",
-  "moonshot token required, please login at https://kimi.moonshot.cn first, and then click the retry button": "请先登录Kimi: https://kimi.moonshot.cn, 然后点击重试按钮",
+  "moonshot token required, please login at https://kimi.com first, and then click the retry button": "请先登录Kimi: https://kimi.com, 然后点击重试按钮",
   "Hide context menu of this extension": "隐藏此扩展的右键菜单",
   "Custom Claude API Url": "自定义的Claude API地址",
   "Cancel": "取消",

@@ -118,7 +118,7 @@ export class MoonshotWeb {
     }
     if (!this.proxy) {
       this.proxy = ({ endpoint, options }) => ({
-        endpoint: 'https://kimi.moonshot.cn' + endpoint,
+        endpoint: 'https://www.kimi.com' + endpoint,
         options,
       })
     }
@@ -139,7 +139,7 @@ export class MoonshotWeb {
       headers: {
         accept: '*/*',
         Authorization: `Bearer ${this.accessToken}`,
-        Origin: 'https://kimi.moonshot.cn',
+        Origin: 'https://www.kimi.com',
       },
       method: 'GET',
     })
@@ -150,7 +150,7 @@ export class MoonshotWeb {
         headers: {
           accept: '*/*',
           Authorization: `Bearer ${this.refreshToken}`,
-          Origin: 'https://kimi.moonshot.cn',
+          Origin: 'https://www.kimi.com',
         },
         method: 'GET',
       })
@@ -187,7 +187,7 @@ export class MoonshotWeb {
         accept: '*/*',
         'content-type': 'application/json',
         Authorization: `Bearer ${this.accessToken}`,
-        Origin: 'https://kimi.moonshot.cn',
+        Origin: 'https://www.kimi.com',
       },
       method: 'POST',
       signal: params.signal,
@@ -317,7 +317,7 @@ export class Conversation {
     }
     if (!this.moonshot.refreshToken) {
       throw new Error(
-        'moonshot token required, please login at https://kimi.moonshot.cn first, and then click the retry button',
+        'moonshot token required, please login at https://kimi.com first, and then click the retry button',
       )
     }
     if (!this.conversationId) {
@@ -392,7 +392,7 @@ export class Conversation {
       reject = j
     })
     let fullResponse = ''
-    await fetchSSE(`https://kimi.moonshot.cn/api/chat/${this.conversationId}/completion/stream`, {
+    await fetchSSE(`https://www.kimi.com/api/chat/${this.conversationId}/completion/stream`, {
       method: 'POST',
       headers: {
         accept: '*/*',
@@ -455,7 +455,7 @@ export class Conversation {
       headers: {
         accept: '*/*',
         Authorization: `Bearer ${this.moonshot.accessToken}`,
-        Origin: 'https://kimi.moonshot.cn',
+        Origin: 'https://www.kimi.com',
       },
       method: 'DELETE',
     }).catch(errorHandle('Delete conversation ' + this.conversationId))

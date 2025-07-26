@@ -351,7 +351,7 @@ async function prepareForStaticCard() {
 
 async function overwriteAccessToken() {
   if (location.hostname !== 'chatgpt.com') {
-    if (location.hostname === 'kimi.moonshot.cn') {
+    if (location.hostname === 'kimi.moonshot.cn' || location.hostname.includes('kimi.com')) {
       setUserConfig({
         kimiMoonShotRefreshToken: window.localStorage.refresh_token,
       })
@@ -446,7 +446,10 @@ async function prepareForJumpBackNotification() {
       })
     }
 
-    if (location.hostname === 'kimi.moonshot.cn' && !window.localStorage.refresh_token) {
+    if (
+      (location.hostname === 'kimi.moonshot.cn' || location.hostname.includes('kimi.com')) &&
+      !window.localStorage.refresh_token
+    ) {
       console.log('kimi not logged in')
       setTimeout(() => {
         document.querySelector('.user-info-container').click()
