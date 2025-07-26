@@ -14,7 +14,7 @@ export default {
         const newPath = getVideoPath()
         if (newPath !== oldPath) {
           oldPath = newPath
-          mountComponent(config.bilibili)
+          mountComponent('bilibili', config.bilibili)
         }
       }
       window.setInterval(checkPathChange, 500)

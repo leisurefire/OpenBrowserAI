@@ -32,9 +32,14 @@ import { generateAnswersWithChatgptWebApi } from '../services/apis/chatgpt-web.m
 import WebJumpBackNotification from '../components/WebJumpBackNotification'
 
 /**
+ * @param {string} siteName
  * @param {SiteConfig} siteConfig
  */
-async function mountComponent(siteConfig) {
+async function mountComponent(siteName, siteConfig) {
+  if (siteName === 'github' && location.href.includes('/wiki')) {
+    return
+  }
+
   const userConfig = await getUserConfig()
 
   if (!userConfig.alwaysFloatingSidebar) {
@@ -110,6 +115,9 @@ async function mountComponent(siteConfig) {
 
   const container = document.createElement('div')
   container.id = 'chatgptbox-container'
+  if (siteName === 'google' || siteName === 'kagi') {
+    container.style.width = '350px'
+  }
   render(
     <DecisionCard
       session={initSession({
@@ -337,7 +345,7 @@ async function prepareForStaticCard() {
       }
     }
 
-    if (initSuccess) mountComponent(siteConfig[siteName])
+    if (initSuccess) mountComponent(siteName, siteConfig[siteName])
   }
 }
 
