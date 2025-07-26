@@ -301,6 +301,25 @@ try {
     ['requestHeaders'],
   )
 
+  Browser.webRequest.onBeforeSendHeaders.addListener(
+    (details) => {
+      const headers = details.requestHeaders
+      for (let i = 0; i < headers.length; i++) {
+        if (headers[i].name === 'Origin') {
+          headers[i].value = 'https://claude.ai'
+        } else if (headers[i].name === 'Referer') {
+          headers[i].value = 'https://claude.ai'
+        }
+      }
+      return { requestHeaders: headers }
+    },
+    {
+      urls: ['https://claude.ai/*'],
+      types: ['xmlhttprequest'],
+    },
+    ['requestHeaders'],
+  )
+
   Browser.tabs.onUpdated.addListener(async (tabId, info, tab) => {
     if (!tab.url) return
     // eslint-disable-next-line no-undef
