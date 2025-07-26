@@ -39,7 +39,11 @@ export const chatgptWebModelKeys = [
 export const bingWebModelKeys = ['bingFree4', 'bingFreeSydney']
 export const bardWebModelKeys = ['bardWebFree']
 export const claudeWebModelKeys = ['claude2WebFree']
-export const moonshotWebModelKeys = ['moonshotWebFree']
+export const moonshotWebModelKeys = [
+  'moonshotWebFree',
+  'moonshotWebFreeK15',
+  'moonshotWebFreeK15Think',
+]
 export const gptApiModelKeys = ['gptApiInstruct', 'gptApiDavinci']
 export const chatgptApiModelKeys = [
   'chatgptApi35',
@@ -277,7 +281,12 @@ export const Models = {
   bingFree4: { value: '', desc: 'Bing (Web, GPT-4)' },
   bingFreeSydney: { value: '', desc: 'Bing (Web, GPT-4, Sydney)' },
 
-  moonshotWebFree: { value: '', desc: 'Kimi.Moonshot (Web, 100k)' },
+  moonshotWebFree: { value: 'k2', desc: 'Kimi.Moonshot (Web k2, 100k)' },
+  moonshotWebFreeK15: { value: 'k1.5', desc: 'Kimi.Moonshot (Web k1.5, 100k)' },
+  moonshotWebFreeK15Think: {
+    value: 'k1.5-thinking',
+    desc: 'Kimi.Moonshot (Web k1.5 Thinking, 100k)',
+  },
 
   bardWebFree: { value: '', desc: 'Gemini (Web)' },
 
@@ -316,6 +325,14 @@ export const Models = {
   poeAiWebChatGpt_16k: { value: 'chatgpt-16k', desc: 'Poe AI (Web, ChatGPT-16k)' },
   poeAiWebCustom: { value: '', desc: 'Poe AI (Web, Custom)' },
 
+  moonshot_k2: {
+    value: 'kimi-k2-0711-preview',
+    desc: 'Kimi.Moonshot (k2)',
+  },
+  moonshot_kimi_latest: {
+    value: 'kimi-latest',
+    desc: 'Kimi.Moonshot (kimi-latest)',
+  },
   moonshot_v1_8k: {
     value: 'moonshot-v1-8k',
     desc: 'Kimi.Moonshot (8k)',

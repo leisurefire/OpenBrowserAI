@@ -368,7 +368,7 @@ export class Conversation {
     {
       // eslint-disable-next-line no-unused-vars
       retry = false,
-      model = 'default',
+      model = 'k2',
       done = () => {},
       progress = () => {},
       // eslint-disable-next-line no-unused-vars
@@ -376,11 +376,16 @@ export class Conversation {
       signal = null,
     } = {},
   ) {
-    if (model === 'default') {
-      model = this.moonshot.defaultModel()
-    }
     // {"messages":[{"role":"user","content":"hello"}],"refs":[],"use_search":true}
-    const body = { messages: [{ role: 'user', content: message }], refs: [], use_search: true }
+    const body = {
+      kimiplus_id: 'kimi',
+      messages: [{ role: 'user', content: message }],
+      model,
+      refs: [],
+      use_search: true,
+      use_deep_research: false,
+      use_semantic_memory: false,
+    }
     let resolve, reject
     let returnPromise = new Promise((r, j) => {
       resolve = r

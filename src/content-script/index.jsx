@@ -441,11 +441,7 @@ async function prepareForJumpBackNotification() {
     if (location.hostname === 'kimi.moonshot.cn' && !window.localStorage.refresh_token) {
       console.log('kimi not logged in')
       setTimeout(() => {
-        document.querySelectorAll('button').forEach((button) => {
-          if (button.textContent === '立即登录') {
-            button.click()
-          }
-        })
+        document.querySelector('.user-info-container').click()
       }, 1000)
 
       await new Promise((resolve) => {
