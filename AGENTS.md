@@ -46,7 +46,6 @@ The project uses Preact (for React-like components), SCSS (for styling), and Web
 ### Manifests
 
 - `src/manifest.json` - Manifest v3 for Chromium browsers (Chrome, Edge, Opera, etc.)
-- `src/manifest.v2.json` - Manifest v2 for Firefox (current status; future MV3 migration may change this)
   - Background runs as service worker (MV3) vs background page (MV2)
   - Different permission models between manifest versions
 
