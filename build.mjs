@@ -306,6 +306,24 @@ async function finishOutput(outputDirSuffix) {
     chromiumOutputDir,
   )
   if (isProduction) await zipFolder(chromiumOutputDir)
+
+  // Clean intermediate webpack outputs in the outdir, keep only chromium directory and chromium.zip
+  await cleanIntermediateBuildFiles()
+}
+
+async function cleanIntermediateBuildFiles() {
+  try {
+    if (!(await fs.pathExists(outdir))) return
+    const entries = await fs.readdir(outdir)
+    for (const name of entries) {
+      // keep chromium directory and chromium zip file
+      if (name === 'chromium') continue
+      if (name === 'chromium.zip') continue
+      await fs.rm(path.join(outdir, name), { recursive: true, force: true })
+    }
+  } catch (e) {
+    console.error('Failed to clean intermediate build files', e)
+  }
 }
 
 function generateWebpackCallback(finishOutputFunc) {
@@ -322,21 +340,6 @@ function generateWebpackCallback(finishOutputFunc) {
 
 async function build() {
   await deleteOldDir()
-  if (isProduction && !isAnalyzing) {
-    // await runWebpack(
-    //   true,
-    //   false,
-    //   generateWebpackCallback(() => finishOutput('-without-katex')),
-    // )
-    // await new Promise((r) => setTimeout(r, 5000))
-    await runWebpack(
-      true,
-      true,
-      true,
-      generateWebpackCallback(() => finishOutput('-without-katex-and-tiktoken')),
-    )
-    await new Promise((r) => setTimeout(r, 10000))
-  }
   await runWebpack(
     false,
     false,

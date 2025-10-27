@@ -1,6 +1,6 @@
-# ChatGPTBox - Browser Extension
+# OpenBrowserAI - Browser Extension
 
-ChatGPTBox is a cross-platform browser extension that deeply integrates ChatGPT and other AI models into web browsing. The extension provides chat dialogs, selection tools, site-specific adapters, and AI-powered features across the web.
+OpenBrowserAI is a cross-platform browser extension that deeply integrates large AI models into web browsing. The extension provides chat dialogs, selection tools, site-specific adapters, and AI-powered features across the web.
 
 Always reference these instructions first and fall back to search or bash commands only when you encounter unexpected information that does not match the info here.
 
@@ -22,13 +22,8 @@ Always reference these instructions first and fall back to search or bash comman
 Production build creates multiple variants in `build/` directory:
 
 - `chromium/` - Chromium-based browsers (Chrome, Edge) with full features
-- `firefox/` - Firefox with manifest v2
-- `chromium-without-katex-and-tiktoken/` - Minimal build without math rendering and token encoding
-- `firefox-without-katex-and-tiktoken/` - Minimal Firefox build without math rendering and token encoding
 - Distribution artifacts:
   - Chromium: `build/chromium.zip`
-  - Firefox: `build/firefox.zip`
-  - Safari: `Fission - ChatBox.app` and `safari.dmg` (see Safari Build section for details)
 
 ## Architecture Overview
 
@@ -46,7 +41,7 @@ The project uses Preact (for React-like components), SCSS (for styling), and Web
 ### Manifests
 
 - `src/manifest.json` - Manifest v3 for Chromium browsers (Chrome, Edge, Opera, etc.)
-  - Background runs as service worker (MV3) vs background page (MV2)
+  - Background runs as service worker (MV3)
   - Different permission models between manifest versions
 
 ## Testing and Validation
@@ -63,15 +58,15 @@ This browser extension has no automated tests, so manual testing is essential:
 2. **Core Functionality Tests:**
    - Press `Ctrl+B` (Windows/Linux) or `⌘+B` (macOS) to open the chat dialog on any webpage
    - Select text on a page, verify selection tools appear
-   - Right-click and verify "Ask ChatGPT" context menu appears
+   - Right-click and verify "Ask OpenBrowserAI" context menu appears
    - Click extension icon to open popup
    - Press `Ctrl+Shift+H` (Windows/Linux) or `⌘+Shift+H` (macOS) to open the independent conversation page
 
 3. **Site Integration Tests:**
    - Visit YouTube.com, verify video summary features work
-   - Visit Reddit.com, verify ChatGPT integration appears in sidebar
+   - Visit Reddit.com, verify OpenBrowserAI integration appears in sidebar
    - Visit GitHub.com, verify code analysis features work
-   - Visit Google.com search results, verify ChatGPT responses appear
+   - Visit Google.com search results, verify OpenBrowserAI responses appear
 
 4. **Configuration Tests:**
    - Open extension popup, navigate through tabs (General, Feature Pages, Modules > Selection Tools, Modules > Sites, Advanced)
@@ -168,7 +163,7 @@ src/
 ### Safari Build (macOS Only)
 
 - Run `npm run build:safari` (requires macOS with Xcode installed)
-- Creates `Fission - ChatBox.app` bundle and `safari.dmg` installer
+- Creates `OpenBrowserAI.app` bundle and `openbrowserai.dmg` installer
 - Uses `safari/build.sh` script with platform-specific patches
 
 ### Cross-Browser Compatibility
