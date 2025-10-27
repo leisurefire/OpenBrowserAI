@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { CheckIcon, CopyIcon } from '@primer/octicons-react'
 import PropTypes from 'prop-types'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 
 CopyButton.propTypes = {
   contentFn: PropTypes.func.isRequired,

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { isFirefox, isMobile, isSafari, updateRefHeight } from '../../utils'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import { getUserConfig } from '../../config/index.mjs'
 
 export function InputBox({ onSubmit, enabled, postMessage, reverseResizeDir }) {
@@ -21,7 +21,7 @@ export function InputBox({ onSubmit, enabled, postMessage, reverseResizeDir }) {
   const virtualInputRef = internalReverseResizeDir ? reverseDivRef : inputRef
 
   useEffect(() => {
-    inputRef.current.focus()
+    if (inputRef.current) inputRef.current.focus()
 
     const onResizeY = () => {
       if (virtualInputRef.current.h !== virtualInputRef.current.offsetHeight) {
@@ -49,7 +49,7 @@ export function InputBox({ onSubmit, enabled, postMessage, reverseResizeDir }) {
   useEffect(() => {
     if (enabled)
       getUserConfig().then((config) => {
-        if (config.focusAfterAnswer) inputRef.current.focus()
+        if (config.focusAfterAnswer && inputRef.current) inputRef.current.focus()
       })
   }, [enabled])
 

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import { config as toolsConfig } from '../../content-script/selection-tools/index.mjs'
 import PropTypes from 'prop-types'
 import { useState } from 'react'

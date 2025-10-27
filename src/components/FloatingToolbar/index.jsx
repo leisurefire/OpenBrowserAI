@@ -5,7 +5,7 @@ import { config as toolsConfig } from '../../content-script/selection-tools'
 import { getClientPosition, isMobile, setElementPositionInViewport } from '../../utils'
 import Draggable from 'react-draggable'
 import { useClampWindowSize } from '../../hooks/use-clamp-window-size'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import { useConfig } from '../../hooks/use-config.mjs'
 
 // const logo = Browser.runtime.getURL('logo.png')

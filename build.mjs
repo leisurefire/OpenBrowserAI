@@ -25,11 +25,8 @@ async function runWebpack(isWithoutKatex, isWithoutTiktoken, minimal, callback) 
     '@primer/octicons-react',
     'react-bootstrap-icons',
     'countries-list',
-    'i18next',
-    'react-i18next',
     'react-tabs',
     './src/utils',
-    './src/_locales/i18n-react',
   ]
   if (isWithoutKatex) shared.push('./src/components')
 
@@ -105,6 +102,8 @@ async function runWebpack(isWithoutKatex, isWithoutTiktoken, minimal, callback) 
       extensions: ['.jsx', '.mjs', '.js'],
       alias: {
         parse5: path.resolve(__dirname, 'node_modules/parse5'),
+        i18next: path.resolve(__dirname, 'src/_locales/i18next-shim.mjs'),
+        'react-i18next': path.resolve(__dirname, 'src/_locales/react-i18next-shim.mjs'),
         ...(minimal
           ? { buffer: path.resolve(__dirname, 'node_modules/buffer') }
           : {
@@ -307,14 +306,6 @@ async function finishOutput(outputDirSuffix) {
     chromiumOutputDir,
   )
   if (isProduction) await zipFolder(chromiumOutputDir)
-
-  // firefox
-  const firefoxOutputDir = `./${outdir}/firefox${outputDirSuffix}`
-  await copyFiles(
-    [...commonFiles, { src: 'src/manifest.v2.json', dst: 'manifest.json' }],
-    firefoxOutputDir,
-  )
-  if (isProduction) await zipFolder(firefoxOutputDir)
 }
 
 function generateWebpackCallback(finishOutputFunc) {

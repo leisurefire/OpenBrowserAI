@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import { TrashIcon } from '@primer/octicons-react'
 
 DeleteButton.propTypes = {
@@ -15,7 +15,7 @@ function DeleteButton({ onConfirm, size, text }) {
   const confirmRef = useRef(null)
 
   useEffect(() => {
-    if (waitConfirm) confirmRef.current.focus()
+    if (waitConfirm && confirmRef.current) confirmRef.current.focus()
   }, [waitConfirm])
 
   return (

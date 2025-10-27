@@ -1,6 +1,5 @@
 import Browser from 'webextension-polyfill'
-import { defaultConfig, getPreferredLanguageKey, getUserConfig } from '../config/index.mjs'
-import { changeLanguage, t } from 'i18next'
+import { defaultConfig, getUserConfig } from '../config/index.mjs'
 import { config as menuConfig } from '../content-script/menu-tools/index.mjs'
 
 const menuId = 'ChatGPTBox-Menu'
@@ -39,9 +38,6 @@ export function refreshMenu() {
   Browser.contextMenus.removeAll().then(async () => {
     if ((await getUserConfig()).hideContextMenu) return
 
-    await getPreferredLanguageKey().then((lang) => {
-      changeLanguage(lang)
-    })
     Browser.contextMenus.create({
       id: menuId,
       title: 'ChatGPTBox',
@@ -52,7 +48,7 @@ export function refreshMenu() {
       Browser.contextMenus.create({
         id: menuId + k,
         parentId: menuId,
-        title: t(v.label),
+        title: v.label,
         contexts: ['all'],
       })
     }
@@ -68,7 +64,7 @@ export function refreshMenu() {
       Browser.contextMenus.create({
         id: menuId + key,
         parentId: menuId,
-        title: t(desc),
+        title: desc,
         contexts: ['selection'],
       })
     }

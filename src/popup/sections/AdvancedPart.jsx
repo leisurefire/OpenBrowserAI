@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import { parseFloatWithClamp, parseIntWithClamp } from '../../utils/index.mjs'
 import PropTypes from 'prop-types'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
@@ -71,28 +71,6 @@ function ApiUrl({ config, updateConfig }) {
   return (
     <>
       <label>
-        {t('Custom ChatGPT Web API Url')}
-        <input
-          type="text"
-          value={config.customChatGptWebApiUrl}
-          onChange={(e) => {
-            const value = e.target.value
-            updateConfig({ customChatGptWebApiUrl: value })
-          }}
-        />
-      </label>
-      <label>
-        {t('Custom ChatGPT Web API Path')}
-        <input
-          type="text"
-          value={config.customChatGptWebApiPath}
-          onChange={(e) => {
-            const value = e.target.value
-            updateConfig({ customChatGptWebApiPath: value })
-          }}
-        />
-      </label>
-      <label>
         {t('Custom OpenAI API Url')}
         <input
           type="text"
@@ -103,6 +81,7 @@ function ApiUrl({ config, updateConfig }) {
           }}
         />
       </label>
+
       <label>
         {t('Custom Claude API Url')}
         <input

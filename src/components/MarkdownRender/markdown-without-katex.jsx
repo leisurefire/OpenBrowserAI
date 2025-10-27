@@ -6,7 +6,7 @@ import remarkBreaks from 'remark-breaks'
 import { Pre } from './Pre'
 import { Hyperlink } from './Hyperlink'
 import { memo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 
 // eslint-disable-next-line
 const ThinkComponent = ({ node, children, ...props }) => {

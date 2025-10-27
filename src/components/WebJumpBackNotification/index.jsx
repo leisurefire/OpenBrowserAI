@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import PropTypes from 'prop-types'
 import Browser from 'webextension-polyfill'
 import { toast, ToastContainer } from 'react-toastify'

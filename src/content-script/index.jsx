@@ -5,31 +5,18 @@ import DecisionCard from '../components/DecisionCard'
 import { config as siteConfig } from './site-adapters'
 import { config as toolsConfig } from './selection-tools'
 import { config as menuConfig } from './menu-tools'
-import {
-  chatgptWebModelKeys,
-  getPreferredLanguageKey,
-  getUserConfig,
-  isUsingChatgptWebModel,
-  setAccessToken,
-  setUserConfig,
-} from '../config/index.mjs'
+import { getUserConfig } from '../config/index.mjs'
+
 import {
   createElementAtPosition,
   cropText,
   endsWithQuestionMark,
-  getApiModesStringArrayFromConfig,
   getClientPosition,
   getPossibleElementByQuerySelector,
 } from '../utils'
 import FloatingToolbar from '../components/FloatingToolbar'
 import Browser from 'webextension-polyfill'
-import { getPreferredLanguage } from '../config/language.mjs'
-import '../_locales/i18n-react'
-import { changeLanguage } from 'i18next'
 import { initSession } from '../services/init-session.mjs'
-import { getChatGptAccessToken, registerPortListener } from '../services/wrappers.mjs'
-import { generateAnswersWithChatgptWebApi } from '../services/apis/chatgpt-web.mjs'
-import WebJumpBackNotification from '../components/WebJumpBackNotification'
 
 /**
  * @param {string} siteName
@@ -141,8 +128,8 @@ async function getInput(inputQuery) {
   let input
   if (typeof inputQuery === 'function') {
     input = await inputQuery()
-    const replyPromptBelow = `Reply in ${await getPreferredLanguage()}. Regardless of the language of content I provide below. !!This is very important!!`
-    const replyPromptAbove = `Reply in ${await getPreferredLanguage()}. Regardless of the language of content I provide above. !!This is very important!!`
+    const replyPromptBelow = `Reply in English. Regardless of the language of content I provide below. !!This is very important!!`
+    const replyPromptAbove = `Reply in English. Regardless of the language of content I provide above. !!This is very important!!`
     if (input) return `${replyPromptBelow}\n\n` + input + `\n\n${replyPromptAbove}`
     return input
   }
@@ -152,7 +139,7 @@ async function getInput(inputQuery) {
     else if (searchInput.textContent) input = searchInput.textContent
     if (input)
       return (
-        `Reply in ${await getPreferredLanguage()}.\nThe following is a search input in a search engine, ` +
+        `Reply in English.\nThe following is a search input in a search engine, ` +
         `giving useful content or solutions and as much information as you can related to it, ` +
         `use markdown syntax to make your answer more readable, such as code blocks, bold, list:\n` +
         input
@@ -290,7 +277,7 @@ async function prepareForRightClickMenu() {
         const menuItem = menuConfig[data.itemId]
         if (!menuItem.genPrompt) return
         else prompt = await menuItem.genPrompt()
-        if (prompt) prompt = await cropText(`Reply in ${await getPreferredLanguage()}.\n` + prompt)
+        if (prompt) prompt = await cropText(`Reply in English.\n` + prompt)
       }
 
       const position = data.useMenuPosition
@@ -349,154 +336,11 @@ async function prepareForStaticCard() {
   }
 }
 
-async function overwriteAccessToken() {
-  if (location.hostname !== 'chatgpt.com') {
-    if (location.hostname === 'kimi.moonshot.cn' || location.hostname.includes('kimi.com')) {
-      setUserConfig({
-        kimiMoonShotRefreshToken: window.localStorage.refresh_token,
-      })
-    }
-    return
-  }
-
-  let data
-  if (location.pathname === '/api/auth/session') {
-    const response = document.querySelector('pre').textContent
-    try {
-      data = JSON.parse(response)
-    } catch (error) {
-      console.error('json error', error)
-    }
-  } else {
-    const resp = await fetch('https://chatgpt.com/api/auth/session')
-    data = await resp.json().catch(() => ({}))
-  }
-  if (data && data.accessToken) {
-    await setAccessToken(data.accessToken)
-    console.log(data.accessToken)
-  }
-}
-
-async function prepareForForegroundRequests() {
-  if (location.hostname !== 'chatgpt.com' || location.pathname === '/auth/login') return
-
-  const userConfig = await getUserConfig()
-
-  if (
-    !chatgptWebModelKeys.some((model) =>
-      getApiModesStringArrayFromConfig(userConfig, true).includes(model),
-    )
-  )
-    return
-
-  // if (location.pathname === '/') {
-  //   const input = document.querySelector('#prompt-textarea')
-  //   if (input) {
-  //     input.textContent = ' '
-  //     input.dispatchEvent(new Event('input', { bubbles: true }))
-  //     setTimeout(() => {
-  //       input.textContent = ''
-  //       input.dispatchEvent(new Event('input', { bubbles: true }))
-  //     }, 300)
-  //   }
-  // }
-
-  await Browser.runtime.sendMessage({
-    type: 'SET_CHATGPT_TAB',
-    data: {},
-  })
-
-  registerPortListener(async (session, port) => {
-    if (isUsingChatgptWebModel(session)) {
-      const accessToken = await getChatGptAccessToken()
-      await generateAnswersWithChatgptWebApi(port, session.question, session, accessToken)
-    }
-  })
-}
-
-async function getClaudeSessionKey() {
-  return Browser.runtime.sendMessage({
-    type: 'GET_COOKIE',
-    data: { url: 'https://claude.ai/', name: 'sessionKey' },
-  })
-}
-
-async function prepareForJumpBackNotification() {
-  if (
-    location.hostname === 'chatgpt.com' &&
-    document.querySelector('button[data-testid=login-button]')
-  ) {
-    console.log('chatgpt not logged in')
-    return
-  }
-
-  const url = new URL(window.location.href)
-  if (url.searchParams.has('chatgptbox_notification')) {
-    if (location.hostname === 'claude.ai' && !(await getClaudeSessionKey())) {
-      console.log('claude not logged in')
-
-      await new Promise((resolve) => {
-        const timer = setInterval(async () => {
-          const token = await getClaudeSessionKey()
-          if (token) {
-            clearInterval(timer)
-            resolve()
-          }
-        }, 500)
-      })
-    }
-
-    if (
-      (location.hostname === 'kimi.moonshot.cn' || location.hostname.includes('kimi.com')) &&
-      !window.localStorage.refresh_token
-    ) {
-      console.log('kimi not logged in')
-      setTimeout(() => {
-        document.querySelector('.user-info-container').click()
-      }, 1000)
-
-      await new Promise((resolve) => {
-        const timer = setInterval(() => {
-          const token = window.localStorage.refresh_token
-          if (token) {
-            setUserConfig({
-              kimiMoonShotRefreshToken: token,
-            })
-            clearInterval(timer)
-            resolve()
-          }
-        }, 500)
-      })
-    }
-
-    const div = document.createElement('div')
-    document.body.append(div)
-    render(
-      <WebJumpBackNotification container={div} chatgptMode={location.hostname === 'chatgpt.com'} />,
-      div,
-    )
-  }
-}
-
 async function run() {
-  await getPreferredLanguageKey().then((lang) => {
-    changeLanguage(lang)
-  })
-  Browser.runtime.onMessage.addListener(async (message) => {
-    if (message.type === 'CHANGE_LANG') {
-      const data = message.data
-      changeLanguage(data.lang)
-    }
-  })
-
-  await overwriteAccessToken()
-  await prepareForForegroundRequests()
-
   prepareForSelectionTools()
   prepareForSelectionToolsTouch()
   prepareForStaticCard()
   prepareForRightClickMenu()
-  prepareForJumpBackNotification()
 }
 
 run()

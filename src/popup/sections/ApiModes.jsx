@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import PropTypes from 'prop-types'
 import {
   apiModeToModelName,
@@ -21,8 +21,8 @@ ApiModes.propTypes = {
 }
 
 const defaultApiMode = {
-  groupName: 'chatgptWebModelKeys',
-  itemName: 'chatgptFree35',
+  groupName: 'chatgptApiModelKeys',
+  itemName: 'chatgptApi5Mini',
   isCustom: false,
   customName: '',
   customUrl: 'http://localhost:8000/v1/chat/completions',

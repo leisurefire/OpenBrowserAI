@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ConversationCard from '../ConversationCard'
 import { getPossibleElementByQuerySelector, endsWithQuestionMark } from '../../utils'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import { useConfig } from '../../hooks/use-config.mjs'
 
 function DecisionCard(props) {

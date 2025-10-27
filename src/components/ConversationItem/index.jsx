@@ -4,7 +4,7 @@ import CopyButton from '../CopyButton'
 import ReadButton from '../ReadButton'
 import PropTypes from 'prop-types'
 import MarkdownRender from '../MarkdownRender/markdown.jsx'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 
 function AnswerTitle({ descName }) {
   const { t } = useTranslation()

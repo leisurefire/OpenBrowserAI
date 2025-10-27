@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import { useState } from 'react'
 import { isEdge, isFirefox, isMobile, isSafari, openUrl } from '../../utils/index.mjs'
 import Browser from 'webextension-polyfill'

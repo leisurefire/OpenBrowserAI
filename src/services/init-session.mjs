@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { apiModeToModelName, modelNameToDesc } from '../utils/model-name-convert.mjs'
-import { t } from 'i18next'
+import { t } from '../_locales/i18next-shim.mjs'
 
 /**
  * @typedef {object} Session

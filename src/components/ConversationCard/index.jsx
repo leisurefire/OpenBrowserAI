@@ -11,7 +11,6 @@ import {
   isFirefox,
   isMobile,
   isSafari,
-  isUsingModelName,
   modelNameToDesc,
 } from '../../utils'
 import {
@@ -26,16 +25,15 @@ import FileSaver from 'file-saver'
 import { render } from 'preact'
 import FloatingToolbar from '../FloatingToolbar'
 import { useClampWindowSize } from '../../hooks/use-clamp-window-size'
-import { getUserConfig, isUsingBingWebModel, Models } from '../../config/index.mjs'
-import { useTranslation } from 'react-i18next'
+import { getUserConfig, Models } from '../../config/index.mjs'
+
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import DeleteButton from '../DeleteButton'
 import { useConfig } from '../../hooks/use-config.mjs'
 import { createSession } from '../../services/local-session.mjs'
 import { v4 as uuidv4 } from 'uuid'
 import { initSession } from '../../services/init-session.mjs'
 import { findLastIndex } from 'lodash-es'
-import { generateAnswersWithBingWebApi } from '../../services/apis/bing-web.mjs'
-import { handlePortError } from '../../services/wrappers.mjs'
 
 const logo = Browser.runtime.getURL('logo.png')
 
@@ -62,7 +60,8 @@ function ConversationCard(props) {
   const windowSize = useClampWindowSize([750, 1500], [250, 1100])
   const bodyRef = useRef(null)
   const [completeDraggable, setCompleteDraggable] = useState(false)
-  const useForegroundFetch = isUsingBingWebModel(session)
+  const useForegroundFetch = false
+
   const [apiModes, setApiModes] = useState([])
 
   /**
@@ -215,54 +214,12 @@ function ConversationCard(props) {
     }
   }
 
-  const foregroundMessageListeners = useRef([])
-
   /**
    * @param {Session|undefined} session
    * @param {boolean|undefined} stop
    */
   const postMessage = async ({ session, stop }) => {
-    if (useForegroundFetch) {
-      foregroundMessageListeners.current.forEach((listener) => listener({ session, stop }))
-      if (session) {
-        const fakePort = {
-          postMessage: (msg) => {
-            portMessageListener(msg)
-          },
-          onMessage: {
-            addListener: (listener) => {
-              foregroundMessageListeners.current.push(listener)
-            },
-            removeListener: (listener) => {
-              foregroundMessageListeners.current.splice(
-                foregroundMessageListeners.current.indexOf(listener),
-                1,
-              )
-            },
-          },
-          onDisconnect: {
-            addListener: () => {},
-            removeListener: () => {},
-          },
-        }
-        try {
-          const bingToken = (await getUserConfig()).bingAccessToken
-          if (isUsingModelName('bingFreeSydney', session))
-            await generateAnswersWithBingWebApi(
-              fakePort,
-              session.question,
-              session,
-              bingToken,
-              true,
-            )
-          else await generateAnswersWithBingWebApi(fakePort, session.question, session, bingToken)
-        } catch (err) {
-          handlePortError(session, fakePort, err)
-        }
-      }
-    } else {
-      port.postMessage({ session, stop })
-    }
+    port.postMessage({ session, stop })
   }
 
   useEffect(() => {

@@ -31,12 +31,20 @@
   --active-color: #d0d4da;
 }
 
+html,
+body,
+#app {
+  height: 100%;
+}
+
 .IndependentPanel * {
   font-family: 'Cairo', sans-serif;
   font-size: 14px;
 }
 
 .IndependentPanel {
+  height: 100%;
+
   .chat-container {
     display: flex;
     width: 100%;
@@ -98,6 +106,7 @@
 
   .chat-content {
     flex-grow: 1;
+    height: 100%;
     border: 1px solid var(--theme-border-color);
     background-color: var(--theme-color);
   }

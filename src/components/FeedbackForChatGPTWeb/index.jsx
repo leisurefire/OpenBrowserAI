@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { memo, useCallback, useState } from 'react'
 import { ThumbsupIcon, ThumbsdownIcon } from '@primer/octicons-react'
 import Browser from 'webextension-polyfill'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 
 const FeedbackForChatGPTWeb = (props) => {
   const { t } = useTranslation()

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
@@ -13,7 +13,7 @@ function ConfirmButton({ onConfirm, text }) {
   const confirmRef = useRef(null)
 
   useEffect(() => {
-    if (waitConfirm) confirmRef.current.focus()
+    if (waitConfirm && confirmRef.current) confirmRef.current.focus()
   }, [waitConfirm])
 
   return (

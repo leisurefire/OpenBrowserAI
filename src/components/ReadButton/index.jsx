@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { MuteIcon, UnmuteIcon } from '@primer/octicons-react'
 import PropTypes from 'prop-types'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../_locales/react-i18next-shim.mjs'
 import { useConfig } from '../../hooks/use-config.mjs'
 
 ReadButton.propTypes = {
