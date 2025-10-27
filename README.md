@@ -2,11 +2,11 @@
     <img src="./src/logo.png">
 </p>
 
-<h1 align="center">ChatGPT Box</h1>
+<h1 align="center">OpenBrowserAI</h1>
 
 <div align="center">
 
-Deep ChatGPT integrations in your browser, completely for free.
+Deep LLM integrations in your browser.
 
 [![license][license-image]][license-url]
 [![release][release-image]][release-url]

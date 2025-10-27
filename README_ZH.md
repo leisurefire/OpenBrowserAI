@@ -2,18 +2,18 @@
     <img src="./src/logo.png">
 </p>
 
-<h1 align="center">ChatGPT Box</h1>
+<h1 align="center">OpenBrowserAI</h1>
 
 <div align="center">
 
-将ChatGPT深度集成到浏览器中, 你所需要的一切均在于此
+将大型语言模型与浏览器无缝衔接
 
 [![license][license-image]][license-url]
 [![release][release-image]][release-url]
 [![size](https://img.shields.io/badge/minified%20size-390%20kB-blue)][release-url]
 [![verfiy][verify-image]][verify-url]
 
-[English](README.md) |&nbsp;&nbsp; 简体中文 &nbsp;&nbsp;
+[English](README.md)&nbsp;&nbsp; | 简体中文 &nbsp;&nbsp;
 
 ### 安装链接
 
